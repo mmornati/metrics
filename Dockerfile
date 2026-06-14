@@ -18,8 +18,8 @@ RUN chmod +x /metrics/source/app/action/index.mjs \
   # Install deno for miscellaneous scripts
   && apt-get install -y curl unzip \
   && curl -fsSL https://deno.land/x/install/install.sh | DENO_INSTALL=/usr/local sh \
-  # Install python for node-gyp
-  && apt-get install -y python3 \
+  # Install git (used by some plugins to clone repos) and python for node-gyp
+  && apt-get install -y git python3 \
   # Clean apt/lists
   && rm -rf /var/lib/apt/lists/* \
   # Install node modules and rebuild indexes
