@@ -20,7 +20,7 @@ export default async function({login, data, imports, rest, q, account}, {enabled
     }
 
     //Repositories
-    const repositories = data.user.repositories.nodes.map(({name: repo, owner: {login: owner}}) => ({repo, owner})).sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)) ?? []
+    const repositories = (data.user.repositories?.nodes ?? []).filter(node => node?.owner).sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)).map(({name: repo, owner: {login: owner}}) => ({repo, owner}))
 
     //Get contributors stats from repositories
     console.debug(`metrics/compute/${login}/plugins > lines > querying api`)
